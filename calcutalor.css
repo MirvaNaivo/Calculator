@@ -1,0 +1,32 @@
+@import url(https://fonts.googleapis.com/css?family=Merriweather|Open+Sans|Trirong);
+
+body {
+    background-color: rgb(53, 65, 65);
+    margin: 0;
+}
+
+.header {
+    font-family: 'Merriweather';
+}
+
+.display {
+    font-family: 'Open Sans';
+}
+
+.operators {
+    display: flex;
+    font-family: 'Open Sans';
+}
+
+.button {
+    background-color: rgb(91, 108, 108);
+}
+
+.numbers {
+    display: flex;
+    font-family: 'Open Sans';
+}
+
+.numberButton {
+    background-color: rgb(91, 108, 108);
+}
