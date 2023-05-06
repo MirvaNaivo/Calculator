@@ -4,7 +4,6 @@ let previousNumber = 0;
 let operator = "";
 let is_operator = false;
 let result = 0;
-let output = 0;
 
 window.onload = function() {
     let buttons = document.querySelectorAll("button[data-type=button]");
@@ -46,6 +45,9 @@ function userInput(userInput) {
             console.log(result);
         }
         is_operator = false;
+    }
+    else if(currentNumber.includes(".")) {
+        currentNumber = currentNumber + "" + userInput.replace(".", "");
     }
     else {
         currentNumber += userInput;
@@ -100,12 +102,10 @@ function equals() {
 }
 
 function clear() {
-    input = 0;
     currentNumber = 0;
     previousNumber = 0;
-    operator = '';
+    operator = "";
     is_operator = false;
     result = 0;
-    output = 0;
-    document.getElementById("display").value = 0;
+    display(0);
 }
