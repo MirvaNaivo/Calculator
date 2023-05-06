@@ -1,38 +1,54 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Calculator</title>
     <link rel="stylesheet" href="./calcutalor.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+
 <body>
+    <script src="calculator.js"></script>
     <div class="container">
-        <div class="header">
-            <p>Calculator</p>
-        </div>
-        <div class="display">
-            <p class="displayText">0</p>
-        </div>
-        <div class="operators">
-            <button class="button" id="add">+</button>
-            <button class="button" id="subtract">-</button>
-            <button class="button" id="multiply">*</button>
-            <button class="button" id="divide">/</button>
-            <button class="button" id="equals">=</button>
-            <button class="button" id="clear">C</button>
-        </div>
-        <div class="numbers">
-            <button class="numberButton" id="1">1</button>
-            <button class="numberButton" id="2">2</button>
-            <button class="numberButton" id="3">3</button>
-            <button class="numberButton" id="4">4</button>
-            <button class="numberButton" id="5">5</button>
-            <button class="numberButton" id="6">6</button>
-            <button class="numberButton" id="7">7</button>
-            <button class="numberButton" id="8">8</button>
-            <button class="numberButton" id="9">9</button>
-            <button class="numberButton" id="0">0</button>
-            <button class="numberButton" id=",">,</button>
+        <div class="calculator">
+            <form>
+                <div class="header">
+                    <p>Calculator</p>
+                </div>
+                <div class="display">
+                    <input type="text" name="display" placeholder="0" value="0" id="display">
+                </div>
+                <div>
+                    <button type="button" class="clear" data-type="clear" value="C">C</button>
+                    <button type="button" data-type="button" value=".">.</button>
+                    <button type="button" data-type="operator" value="/">/</button>
+                </div>
+                <div>
+                    <button type="button" data-type="button" value="7">7</button>
+                    <button type="button" data-type="button" value="8">8</button>
+                    <button type="button" data-type="button" value="9">9</button>
+                    <button type="button" data-type="operator" value="*">*</button>
+                </div>
+                <div>
+                    <button type="button" data-type="button" value="4">4</button>
+                    <button type="button" data-type="button" value="5">5</button>
+                    <button type="button" data-type="button" value="6">6</button>
+                    <button type="button" data-type="operator" value="-">-</button>
+                </div>
+                <div>
+                    <button type="button" data-type="button" value="1">1</button>
+                    <button type="button" data-type="button" value="2">2</button>
+                    <button type="button" data-type="button" value="3">3</button>
+                    <button type="button" data-type="operator" value="+">+</button>
+                </div>
+                <div>
+                    <button type="button" data-type="button" value="00">00</button>
+                    <button type="button" data-type="button" value="0">0</button>
+                    <button type="button" class="equal" data-type="equal" value="=">=</button>
+                </div>
+            </form>
         </div>
     </div>
 </body>
+
 </html>

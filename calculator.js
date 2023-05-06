@@ -1,35 +1,111 @@
-let firstNumber = 0;
-let secondNumber = 0;
+let input = 0;
+let currentNumber = 0;
+let previousNumber = 0;
+let operator = "";
+let is_operator = false;
+let result = 0;
+let output = 0;
 
-function operate(operator, firstNumber, secondNumber) {
+window.onload = function() {
+    let buttons = document.querySelectorAll("button[data-type=button]");
+    buttons.forEach((button) => {
+        button.addEventListener("click", (e) => {
+            userInput(e.target.value);
+        });
+    });
+
+    let operators = document.querySelectorAll("button[data-type=operator]");
+    operators.forEach((op) => {
+        op.addEventListener("click", (e) => {
+            operator = e.target.value;
+            console.log(e.target.value);
+            is_operator = true;
+        });
+    });
+
+    let c = document.querySelector("button[data-type=clear]");
+    c.addEventListener("click", clear);
+
+    let equalButton = document.querySelector("button[data-type=equal]");
+    equalButton.addEventListener("click", equals);
+}
+
+function userInput(userInput) {
+    if(currentNumber == 0) {
+        currentNumber = userInput;
+    }
+    else if(is_operator) {
+        if(previousNumber == 0) {
+            previousNumber = currentNumber;
+            currentNumber = userInput;
+            operate(operator, previousNumber, currentNumber);
+        }
+        else if(previousNumber != 0) {
+            previousNumber = result; 
+            currentNumber = userInput;
+            console.log(result);
+        }
+        is_operator = false;
+    }
+    else {
+        currentNumber += userInput;
+    }
+    console.log(previousNumber);
+    console.log(currentNumber);
+    display(currentNumber);
+}
+
+function display(input) {
+    document.getElementById("display").value = input;
+}
+
+function operate(operator, previousNumber, currentNumber) {
     switch(operator) {
         case '+': 
-            add(firstNumber, secondNumber);
+            add(previousNumber, currentNumber);
             break;
         case '-':
-            subtract(firstNumber, secondNumber);
+            subtract(previousNumber, currentNumber);
             break;
         case '*':
-            multiply(firstNumber, secondNumber);
+            multiply(previousNumber, currentNumber);
             break;
         case '/':
-            divide(firstNumber, secondNumber);
+            divide(previousNumber, currentNumber);
+            break;
+        default:
             break;
     }
 }
 
-function add(firstNumber, secondNumber) {
-    return firstNumber + secondNumber;
+function add(previousNumber, currentNumber) {
+    result = Number(previousNumber) + Number(currentNumber);
 }
 
-function subtract(firstNumber, secondNumber) {
-    return firstNumber - secondNumber;
+function subtract(previousNumber, currentNumber) {
+    result = previousNumber - currentNumber;
 }
 
-function multiply(firstNumber, secondNumber) {
-    return firstNumber * secondNumber;
+function multiply(previousNumber, currentNumber) {
+    result = previousNumber * currentNumber;
 }
 
-function divide(firstNumber, secondNumber) {
-    return firstNumber / secondNumber;
+function divide(previousNumber, currentNumber) {
+    result = previousNumber / currentNumber;
+}
+
+function equals() {
+    operate(operator, previousNumber, currentNumber);
+    document.getElementById("display").value = result;
+}
+
+function clear() {
+    input = 0;
+    currentNumber = 0;
+    previousNumber = 0;
+    operator = '';
+    is_operator = false;
+    result = 0;
+    output = 0;
+    document.getElementById("display").value = 0;
 }
