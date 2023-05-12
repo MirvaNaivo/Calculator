@@ -45,22 +45,25 @@ body {
 .display {
     display: flex;
     justify-content: flex-end;
+    flex-direction: column;
+    padding: 10px;
 }
 
 form .display input {
     text-align: right;
     height: 60px;
-    margin: 10px;
     font-size: 20px;
     flex: 1;
     border: none;
-    border-radius: 4px;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.2);
 }
 
 form button.clear {
-    width: 145px; 
     background-color: red;
+}
+
+form button.delete {
+    background-color: darkred;
 }
 
 form button.equal {
