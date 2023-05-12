@@ -10,16 +10,14 @@ window.onload = function () {
     buttons.forEach((button) => {
         button.addEventListener("click", (e) => {
             userInput(e.target.value);
-            console.log(e.target.value);
         });
     });
 
     let operators = document.querySelectorAll("button[data-type=operator]");
     operators.forEach((op) => {
         op.addEventListener("click", (e) => {
-            operator = e.target.value;
-            console.log(operator);
             is_operator = true;
+            chooseOperation(e.target.value);
         });
     });
 
@@ -35,37 +33,44 @@ window.onload = function () {
 
 function userInput(userInput) {
     if(currentNumber == "") {
-        currentNumber = userInput;
+        if(operator == '-') {
+            currentNumber = userInput * -1;
+        }
+        else {
+            currentNumber = userInput;
+        }        
     }
     else if(is_operator) {
-        if(previousNumber == 0) {
+        if(previousNumber == "") {
             previousNumber = currentNumber;
             currentNumber = userInput;
-            operate(operator, previousNumber, currentNumber);
+            operate(previousNumber, operator, currentNumber);
         }
-        else if(previousNumber != 0) {
+        else if(previousNumber != "") {
             previousNumber = result; 
             currentNumber = userInput;
-            console.log(result);
+            operate(previousNumber, operator, currentNumber);
         }
         is_operator = false;
     }
-    else if(currentNumber.includes(".")) {
-        currentNumber = currentNumber + "" + userInput.replace(".", "");
+    else if(userInput == '.' && currentNumber.includes('.')) {
+        return;
     }
     else {
         currentNumber += userInput;
     }
-        display(previousNumber, operator, currentNumber);
+    display(previousNumber, operator, currentNumber);
 }
 
-
+function chooseOperation(value) {
+    operator = value;
+}
 
 function display(previousNumber, operator, currentNumber) {
-    if(operator == '' && previousNumber == 0) {
+    if(isNaN(previousNumber) && operator == undefined) {
         output = currentNumber;
     }
-    else if(previousNumber == 0) {
+    else if(isNaN(previousNumber)) {
         output = currentNumber + operator;
     }
     else {
@@ -89,7 +94,7 @@ function operate(operator, previousNumber, currentNumber) {
             divide(previousNumber, currentNumber);
             break;
         default:
-            break;
+            return;
     }
 }
 
@@ -98,7 +103,7 @@ function add(previousNumber, currentNumber) {
 }
 
 function subtract(previousNumber, currentNumber) {
-    result = previousNumber - currentNumber;
+    result = Number(previousNumber) - Number(currentNumber);
 }
 
 function multiply(previousNumber, currentNumber) {
@@ -110,13 +115,18 @@ function divide(previousNumber, currentNumber) {
 }
 
 function equals() {
-    operate(operator, previousNumber, currentNumber);
-    document.getElementById("result").value = result;
+    if(isNaN(previousNumber) || isNaN(currentNumber)) {
+        return; 
+    }
+    else {
+        operate(operator, previousNumber, currentNumber);
+        document.getElementById("result").value = result;
+    }
 }
 
 function clear() {
-    currentNumber = 0;
-    previousNumber = 0;
+    currentNumber = "";
+    previousNumber = "";
     operator = "";
     is_operator = false;
     result = 0;
